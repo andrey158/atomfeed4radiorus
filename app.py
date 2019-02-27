@@ -6,20 +6,21 @@ from radiorus import radiorus_podcast
 app = Flask(__name__)
 @app.route('/podcast/<podcast_id>')
 def rss_feed(podcast_id):
+    podcast = None
     try:
 
         # Cчитываем информацию об эпизодах из БД:
-        scribbler = radiorus_podcast(podcast_id) # 57260 'Как курица лапой'
+        podcast = radiorus_podcast(podcast_id) # 57260 'Как курица лапой'
 
         # Формируем ленту:
         feed = AtomFeed(
-            scribbler.title, 
+            podcast.title, 
             feed_url=request.url, 
-            url=scribbler.base_url,
-            logo=scribbler.logo_url
+            url=podcast.base_url,
+            logo=podcast.logo_url
         )
 
-        for episode in scribbler.episodes:
+        for episode in podcast.episodes:
 
             links = []
             for audio_record in episode['audio_records']:
@@ -52,4 +53,5 @@ def rss_feed(podcast_id):
         pass
 
     finally:
-        del scribbler
+        if podcast is not None:
+            del podcast

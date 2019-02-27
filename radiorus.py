@@ -32,6 +32,10 @@ def get_date(date_string):
     return datetime.date(year, month, day)
 
 class radiorus_podcast:
+    db_connection = None
+    db_podcasts_cursor = None
+    db_episodes_cursor  = None
+    db_audio_records_cursor = None
 
     def __init__(self, podcast_id):
         if podcast_id.isdigit() == False:
