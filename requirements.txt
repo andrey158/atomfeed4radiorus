@@ -1,4 +1,4 @@
-Flask==1.0.2
-psycopg2==2.7.7
-requests_html==0.10.0
-Werkzeug==0.14.1
+Flask>=1.0.2
+psycopg2>=2.7.7
+requests_html>=0.10.0
+Werkzeug>=0.14.1
